@@ -1,345 +1,344 @@
-# 编程助手 Skill - 使用指南
+# Programming Assistant Skill - Usage Guide
 
 
-## 概述
+## Overview
 
-这是一个专业的编程助手skill，基于ZhiSi Architect方法论，支持全栈开发和架构设计。该skill集成了Context7、sequential-thinking等MCP工具，能够在 **OpenCode**、**Claude Code** 和 **Cursor** 中使用。
+This is a professional programming assistant skill based on the ZhiSi Architect methodology, supporting full-stack development and architecture design. This skill integrates MCP tools such as Context7 and sequential-thinking, and can be used in **OpenCode**, **Claude Code**, and **Cursor**.
 
-## 核心特性
+## Core Features
 
-### 全栈开发支持
-- **前端**: React, Vue, Angular, TypeScript
-- **后端**: Golang, Python, Node.js, Java
-- **数据库**: PostgreSQL, MySQL, MongoDB, Redis
-- **云服务**:
-  - **私有云**: Docker, Docker Compose, Kubernetes
-  - **公有云/混合云**: 腾讯云、阿里云、华为云为主，AWS/Azure/Google Cloud为补充
+### Full-Stack Development Support
+- **Frontend**: React, Vue, Angular, TypeScript
+- **Backend**: Golang, Python, Node.js, Java
+- **Database**: PostgreSQL, MySQL, MongoDB, Redis
+- **Cloud Services**:
+  - **Private Cloud**: Docker, Docker Compose, Kubernetes
+  - **Public/Hybrid Cloud**: Primarily Tencent Cloud, Alibaba Cloud, Huawei Cloud, with AWS/Azure/Google Cloud as supplements
 - **DevOps**:
-  - **CI/CD**: 适配私有云和公有云/混合云两类场景
+  - **CI/CD**: Adapted for both private and public/hybrid cloud scenarios
 
-### MCP工具集成
-- **Context7**: 获取最新文档和代码示例
-- **sequential-thinking**: 深度分析和问题拆解
+### MCP Tool Integration
+- **Context7**: Get latest documentation and code examples
+- **sequential-thinking**: Deep analysis and problem breakdown
 
-## 快速开始
+## Quick Start
 
-### 一键安装（推荐）
+### One-Click Install (Recommended)
 
 ```bash
-# 完整安装（OpenCode + Claude Code + Cursor + MCP）
+# Full installation (OpenCode + Claude Code + Cursor + MCP)
 ./install.sh --all --with-mcp
 ```
 
-这将自动：
-1. ✅ 安装到 OpenCode（全局 skill）
-2. ✅ 安装到 Claude Code（全局 skill）
-3. ✅ 安装到 Cursor（全局规则）
-4. ✅ 配置 MCP 服务器（context7, sequential-thinking）
-5. ✅ 验证安装结果
+This will automatically:
+1. ✅ Install to OpenCode (global skill)
+2. ✅ Install to Claude Code (global skill)
+3. ✅ Install to Cursor (global rules)
+4. ✅ Configure MCP servers (context7, sequential-thinking)
+5. ✅ Verify installation results
 
-**完成后重启相应的 IDE/CLI 即可使用！**
+**Restart the corresponding IDE/CLI after completion to use!**
 
-### OpenCode 用户
+### OpenCode Users
 
 ```bash
 ./install.sh --opencode --with-mcp
 ```
 
-安装到: `~/.config/opencode/skill/programming-assistant/SKILL.md`
+Installs to: `~/.config/opencode/skill/programming-assistant/SKILL.md`
 
-### Claude Code 用户
+### Claude Code Users
 
 ```bash
 ./install.sh --claude-code
 ```
 
-安装到: `~/.claude/skills/programming-assistant/SKILL.md`
+Installs to: `~/.claude/skills/programming-assistant/SKILL.md`
 
-### Cursor 用户
+### Cursor Users
 
 ```bash
 ./install.sh --cursor --with-mcp
 ```
 
-安装到: `~/.cursor/rules/programming-assistant.md`
+Installs to: `~/.cursor/rules/programming-assistant.md`
 
-### 详细文档
+### Detailed Documentation
 
-- **快速开始**: [QUICK-START.md](QUICK-START.md)
-- **Skill 详细说明**: [SKILL.md](SKILL.md)
-- **MCP 安装详解**: [MCP-INSTALL.md](MCP-INSTALL.md)
-- **OpenCode 配置**: [OpenCode Skills 官方文档](https://opencode.ai/docs/skills/)
-- **OpenCode MCP 文档**: [OpenCode MCP 服务器文档](https://opencode.ai/docs/mcp-servers/)
-- **Claude Code 配置**: [Claude Code Skills 官方文档](https://docs.anthropic.com/en/docs/claude-code/skills)
+- **Quick Start**: [QUICK-START.md](QUICK-START.md)
+- **Skill Details**: [SKILL.md](SKILL.md)
+- **MCP Installation**: [MCP-INSTALL.md](MCP-INSTALL.md)
+- **OpenCode Configuration**: [OpenCode Skills Official Docs](https://opencode.ai/docs/skills/)
+- **OpenCode MCP Docs**: [OpenCode MCP Server Docs](https://opencode.ai/docs/mcp-servers/)
+- **Claude Code Config**: [Claude Code Skills Official Docs](https://docs.anthropic.com/en/docs/claude-code/skills)
 
 
-## 工作流程
+## Workflow
 
-### 项目初始化
+### Project Initialization
 ```
-输入: 新项目需求
-流程:
-  1. 读取项目根目录的 SOLUTION.md 和 TASK.md（如果存在）
-  2. 如果文件不存在：
-     - 使用 sequential-thinking MCP 分析需求
-     - 生成 SOLUTION.md 架构文档
-     - 将 SOLUTION.md 拆解成 TASK.md 任务列表（包含实现步骤、技术选型、代码片段）
-  3. 将 TASK.md 转化为 feature_list.json（只包含任务基本信息和状态）
-  4. 理解架构设计和技术选型
-  5. 检查 README.md，不存在则创建
-  6. 创建 progress.txt
-  7. 初始化 git 仓库
-输出: 项目初始化完成，准备开发
-```
-
-### 需求分析
-```
-输入: 用户功能需求
-流程:
-  1. 深入理解需求，从用户角度思考
-  2. 使用 sequential-thinking 分析需求完整性
-  3. 识别缺失需求或缺口，与用户讨论完善
-  4. 选择最简单的解决方案，避免过度工程化
-输出: 需求确认和技术方案
+Input: New project requirements
+Process:
+  1. Read SOLUTION.md and TASK.md in project root (if they exist)
+  2. If files do not exist:
+     - Use sequential-thinking MCP to analyze requirements
+     - Generate SOLUTION.md architecture document
+     - Break down SOLUTION.md into TASK.md task list (including implementation steps, tech selection, code snippets)
+  3. Transform TASK.md into feature_list.json (contains only basic task info and status)
+  4. Understand architecture design and technical selection
+  5. Check README.md, create if not exists
+  6. Create progress.txt
+  7. Initialize git repository
+Output: Project initialization complete, ready for development
 ```
 
-### 代码实现
+### Requirement Analysis
 ```
-输入: 确认的需求和方案
-流程:
-  1. 按 TASK.md 顺序执行任务
-  2. 每次只完成一个任务
-  3. 使用 Context7 查询最新文档和示例
-  4. 编写符合规范的代码（精确、模块化、可测试）
-  5. 运行测试验证功能
-  6. 确认不破坏现有功能
-输出: 可测试的代码单元
-```
-### 问题解决
-```
-输入: 用户反馈的问题或错误
-流程:
-  1. 彻底审查相关代码
-  2. 使用 sequential-thinking 深度分析
-  3. 使用 Context7 查询相关文档和最佳实践
-  4. 提出多个解决方案，使用决策树评估
-  5. 选择最优方案并实施
-  6. 最小化修改，确保不破坏现有功能
-  7. 测试验证修复效果
-输出: 问题解决和修复代码
+Input: User functional requirements
+Process:
+  1. Deeply understand requirements from the user's perspective
+  2. Use sequential-thinking to analyze requirement completeness
+  3. Identify missing requirements or gaps, discuss and refine with user
+  4. Choose the simplest solution, avoid over-engineering
+Output: Requirement confirmation and technical plan
 ```
 
-## 使用示例
-
-### 示例1: 新项目初始化
-
-**用户输入**:
+### Code Implementation
 ```
-帮我开发一个电商系统，功能包括：
-- 商品浏览和搜索
-- 购物车和订单管理
-- 用户注册和登录
-- 支付集成
-
-前端使用Vue.js，后端使用Golang 1.22+，数据库使用PostgreSQL。
+Input: Confirmed requirements and plan
+Process:
+  1. Execute tasks in TASK.md order
+  2. Complete only one task at a time
+  3. Use Context7 to query latest docs and examples
+  4. Write compliant code (precise, modular, testable)
+  5. Run tests to verify functionality
+  6. Confirm no regressions in existing features
+Output: Testable code units
 ```
-
-**助手会自动**:
-1. 检查 SOLUTION.md 和 TASK.md 是否存在
-2. 如果不存在：
-   - 使用 sequential-thinking MCP 分析需求
-   - 生成 SOLUTION.md 架构文档
-   - 将 SOLUTION.md 拆解成 TASK.md 任务列表
-3. 创建 progress.txt 和 feature_list.json
-4. 创建项目目录结构
-5. 初始化配置文件
-6. 初始化 git 仓库并首次提交
-
-### 示例2: 功能实现
-
-**用户输入**:
+### Problem Solving
 ```
-实现用户登录功能
+Input: User-reported issues or errors
+Process:
+  1. Thoroughly review relevant code
+  2. Use sequential-thinking for deep analysis
+  3. Use Context7 to query relevant documentation and best practices
+  4. Propose multiple solutions, evaluate using decision tree
+  5. Select optimal solution and implement
+  6. Minimize modifications, ensure no impact on existing features
+  7. Test and verify fix effect
+Output: Resolved issue and fix code
 ```
 
-**助手会自动**:
-1. 读取 SOLUTION.md 和 TASK.md
-2. 使用 Context7 查询JWT最佳实践
-3. 设计登录API接口
-4. 实现后端认证逻辑
-5. 实现前端登录组件
-6. 编写测试用例
-7. 运行测试验证
+## Usage Examples
 
-### 示例3: 问题修复
+### Example 1: New Project Initialization
 
-**用户输入**:
+**User Input**:
 ```
-登录后session过期太快，怎么调整？
-```
+Help me develop an e-commerce system with features including:
+- Product browsing and search
+- Shopping cart and order management
+- User registration and login
+- Payment integration
 
-**助手会自动**:
-1. 审查认证相关代码
-2. 使用 sequential-thinking 分析原因
-3. 使用 Context7 查询session配置最佳实践
-4. 提出调整session过期时间的方案
-5. 实施修改
-6. 测试验证效果
-
-## 代码规范
-
-### 必须遵守
-1. 用最少的代码完成任务
-2. 代码必须精确、模块化、可测试
-3. 始终考虑安全性
-4. 优化代码性能
-5. 每完成一个任务就进行测试
-
-### 代码风格
-- 不使用emoji
-- 减少代码注释，仅必要时编写
-- 遵循现有代码库的规范和风格
-- 保持代码清晰性和可维护性
-
-### 文档规范
-- 减少文档数量
-- 仅保留主要文档：README.md, SOLUTION.md, TASK.md, DEPLOYMENT.md
-- 使用简体中文编写文档
-- 技术术语保持英文原样
-
-## 响应规则
-
-### 语言规则
-- **必须使用简体中文回复**（最高优先级）
-- 技术术语使用英文原样（API, React, Vue 等）
-- 产品名称、品牌名使用英文原样
-- 代码片段、命令使用英文原样
-
-### 沟通风格
-- **简洁直接**: 不废话，直接开始工作
-- **无奉承**: 不使用"好问题"、"太棒了"等
-- **无状态汇报**: 不说"我正在..."、"让我开始..."
-- **使用todo**: 用todo工具跟踪进度，不要口头汇报
-- **匹配用户**: 用户简洁则简洁，需要细节则提供细节
-
-## 工具使用优先级
-
-```
-1. 需求分析
-   ↓ sequential-thinking (深度分析)
-
-2. 技术调研
-   ↓ Context7 (文档查询)
-   ↓ grep/Grep (代码搜索)
-
-3. 代码实现
-   ↓ Read/Write/Edit (文件操作)
-   ↓ lsp_* (LSP工具)
-   ↓ Bash (命令执行)
-
-4. 测试验证
-   ↓ Bash (运行测试)
-   ↓ lsp_diagnostics (代码检查)
-
-5. 用户交互
-   ↓ todoread (获取反馈)
-   ↓ todowrite (进度跟踪)
+Frontend uses Vue.js, backend uses Golang 1.22+, database uses PostgreSQL.
 ```
 
-## 质量保证
+**Assistant will automatically**:
+1. Check if SOLUTION.md and TASK.md exist
+2. If not:
+   - Use sequential-thinking MCP to analyze requirements
+   - Generate SOLUTION.md architecture document
+   - Break down SOLUTION.md into TASK.md task list
+3. Create progress.txt and feature_list.json
+4. Create project directory structure
+5. Initialize configuration files
+6. Initialize git repository and make first commit
 
-### 代码质量
-- 使用 LSP 工具进行代码检查
-- 运行构建命令确保编译通过
-- 执行测试用例验证功能
-- 检查类型错误和警告
+### Example 2: Feature Implementation
 
-### 测试策略
-- 编写单元测试覆盖核心逻辑
-- 编写集成测试验证模块交互
-- 每完成一个任务立即测试
-- 确保测试通过后再继续下一个任务
+**User Input**:
+```
+Implement user login feature
+```
 
-### 安全检查
-- 验证用户输入
-- 防止SQL注入、XSS等常见漏洞
-- 使用HTTPS和加密传输
-- 遵循最小权限原则
+**Assistant will automatically**:
+1. Read SOLUTION.md and TASK.md
+2. Use Context7 to query JWT best practices
+3. Design login API interface
+4. Implement backend authentication logic
+5. Implement frontend login component
+6. Write test cases
+7. Run tests to verify
 
-## 最佳实践
+### Example 3: Problem Fix
 
-1. **理解优于实施**: 先彻底理解需求，再动手实现
-2. **测试驱动**: 每完成一个单元立即测试
-3. **最小修改**: 每次改动尽可能小，降低风险
-4. **持续反馈**: 与用户保持沟通，及时调整方向
-5. **文档同步**: 代码和文档保持同步更新
-6. **安全第一**: 始终考虑安全性和数据保护
-7. **性能优化**: 在保证功能的前提下优化性能
+**User Input**:
+```
+Session expires too quickly after login, how to adjust?
+```
 
-## 故障恢复
+**Assistant will automatically**:
+1. Review authentication-related code
+2. Use sequential-thinking to analyze cause
+3. Use Context7 to query session configuration best practices
+4. Propose adjustment to session expiration time
+5. Implement modifications
+6. Test and verify effect
 
-### 修复失败时的处理
-1. 修复根本原因，而非症状
-2. 每次修复后重新验证
-3. 不进行随机调试（shotgun debugging）
+## Coding Standards
 
-### 连续失败处理（3次以上）
-1. 停止所有编辑
-2. 回滚到最后已知的工作状态
-3. 记录所有尝试和失败原因
-4. 向用户报告问题，寻求指导
+### Must Follow
+1. Complete tasks with minimal code
+2. Code must be precise, modular, and testable
+3. Always consider security
+4. Optimize code performance
+5. Test after completing each task
 
-## 版本历史
+### Code Style
+- Do not use emojis
+- Minimize code comments, write only when necessary
+- Follow existing codebase standards and style
+- Maintain code clarity and maintainability
+
+### Documentation Standards
+- Minimize documentation count
+- Keep only main docs: README.md, SOLUTION.md, TASK.md, DEPLOYMENT.md
+- Use English for documentation
+- Technical terms remain as original (API, React, Vue, etc.)
+
+## Response Rules
+
+### Language Rules
+- **Must use English for replies** (Highest Priority)
+- Technical terms use original English (API, React, Vue, etc.)
+- Product names, brand names use original English
+- Code snippets, commands use original English
+
+### Communication Style
+- **Concise and Direct**: No fluff, start working immediately
+- **No Flattery**: Do not use "Good question", "Excellent", etc.
+- **No Status Reporting**: Do not say "I am...", "Let me start..."
+- **Use TODOs**: Use todo tools to track progress instead of verbal reports
+- **Match User**: Be concise if the user is concise, provide details if needed
+
+## Tool Priority
+
+```
+1. Requirement Analysis
+   ↓ sequential-thinking (Deep Analysis)
+
+2. Technical Research
+   ↓ Context7 (Doc Search)
+   ↓ grep/Grep (Code Search)
+
+3. Code Implementation
+   ↓ Read/Write/Edit (File Operations)
+   ↓ lsp_* (LSP Tools)
+   ↓ Bash (Command Execution)
+
+4. Verification & Testing
+   ↓ Bash (Run Tests)
+   ↓ lsp_diagnostics (Code Check)
+
+5. User Interaction
+   ↓ todoread (Get Feedback)
+   ↓ todowrite (Progress Tracking)
+```
+
+## Quality Assurance
+
+### Code Quality
+- Use LSP tools for code inspection
+- Run build commands to ensure compilation passes
+- Execute test cases to verify functionality
+- Check for type errors and warnings
+
+### Testing Strategy
+- Write unit tests to cover core logic
+- Write integration tests to verify module interactions
+- Test immediately after completing each task
+- Ensure tests pass before continuing to next task
+
+### Security Check
+- Validate user input
+- Prevent common vulnerabilities like SQL Injection, XSS, etc.
+- Use HTTPS and encrypted transmission
+- Follow principle of least privilege
+
+## Best Practices
+
+1. **Understanding before Implementation**: Thoroughly understand requirements before acting
+2. **Test Driven**: Test immediately after completing each unit
+3. **Minimal Modifications**: Keep modifications as small as possible to reduce risk
+4. **Continuous Feedback**: Communicate with user, adjust direction timely
+5. **Doc Sync**: Keep code and documentation updated synchronously
+6. **Security First**: Always consider security and data protection
+7. **Performance Optimization**: Optimize performance while ensuring functionality
+
+## Failure Recovery
+
+### Handling Fix Failures
+1. Fix root cause, not just symptoms
+2. Re-verify after each fix
+3. No shotgun debugging
+
+### Consecutive Failures (3+ times)
+1. Stop all editing
+2. Roll back to last known working state
+3. Record all attempts and failure reasons
+4. Report issue to user, seek guidance
+
+## Version History
 
 ### v1.3.0 (2025-01-16)
-- 添加自动 MCP 配置功能
-- 支持 OpenCode 的 MCP 配置（~/.config/opencode/opencode.json）
-- 支持 Cursor 的 MCP 配置（~/.cursor/mcp.json）
-- 智能合并配置,不覆盖现有配置
-- 自动备份原配置文件
-- 添加 MCP 配置验证功能
-- 创建详细的 MCP 安装文档（MCP-INSTALL.md）
-- 修正安装脚本参数为 --with-mcp
+- Added automatic MCP configuration
+- Support for OpenCode MCP config (~/.config/opencode/opencode.json)
+- Support for Cursor MCP config (~/.cursor/mcp.json)
+- Smart config merging, does not overwrite existing config
+- Automatic backup of original config files
+- Added MCP config verification
+- Created detailed MCP installation doc (MCP-INSTALL.md)
+- Fixed install script parameter to --with-mcp
 
 ### v1.2.1 (2025-01-16)
-- 修复OpenCode skill未生效问题 - triggers字段已在metadata中
-- 添加command目录复制到OpenCode和Claude Code安装路径
-- 为Cursor创建兼容版本 - 移除YAML frontmatter
-- 添加MCP工具检查和降级机制 - 未安装时跳过MCP配置
-- 修复install.sh安装逻辑
+- Fixed OpenCode skill not taking effect - triggers field in metadata
+- Added command directory copy to OpenCode and Claude Code install paths
+- Created compatible version for Cursor - removed YAML frontmatter
+- Added MCP tool check and fallback mechanism - skip MCP config if not installed
+- Fixed install.sh installation logic
 
 ### v1.2.0 (2025-01-15)
-- 统一版本号管理，创建 VERSION 文件作为单一版本源
-- 优化文档结构，明确各文档职责
-- 创建 MCP-SERVERS.md 统一 MCP 配置文档
-- 创建 DOCS-STRUCTURE.md 说明文档结构
-- 修复版本不一致问题
-- 改进 MCP 配置管理
+- Unified version number management, created VERSION file
+- Optimized doc structure, clarified responsibilities
+- Created MCP-SERVERS.md unified MCP doc
+- Created DOCS-STRUCTURE.md doc structure explanation
+- Fixed version inconsistency issues
+- Improved MCP config management
 
 ### v1.1.0 (2025-01-13)
-- 添加 Claude Code 支持
-- 添加渐进式工作流程
-- 双代理策略（初始化代理 + 编码代理）
-- 三大关键文件（progress.txt, feature_list.json, git history）
-- 黄金法则（干净状态）
-- 修复 OpenCode 安装路径（统一使用 `~/.config/opencode/skill/`）
-- 修复 Cursor 安装路径（使用正确的 `~/.cursor/rules/` 路径）
-- 统一 install.sh 和 uninstall.sh 的路径定义
-- 自动检测 OpenCode、Claude Code、Cursor 安装
+- Added Claude Code support
+- Added progressive workflow
+- Dual-agent strategy (Initialization Agent + Coding Agent)
+- Three key files (progress.txt, feature_list.json, git history)
+- Golden Rule (Clean Slate)
+- Fixed OpenCode install path (unified to `~/.config/opencode/skill/`)
+- Fixed Cursor install path (proper `~/.cursor/rules/` path)
+- Unified install.sh and uninstall.sh path definitions
+- Auto-detect OpenCode, Claude Code, Cursor installation
 
 ### v1.0.0 (2025-01-13)
-- 初始版本发布
-- 基于ZhiSi Architect方法论
-- 集成Context7、sequential-thinking、mcp-feedback-enhanced MCP服务器
-- 支持OpenCode和Cursor平台
+- Initial version release
+- Based on ZhiSi Architect methodology
+- Integrated Context7, sequential-thinking, mcp-feedback-enhanced MCP servers
+- Support for OpenCode and Cursor platforms
 
-## 贡献
+## Contribution
 
-欢迎提出改进建议和问题反馈！
+Suggestions and feedback are welcome!
 
-## 许可
+## License
 
-本skill基于ZhiSi Architect方法论创建，可自由使用和修改。
+This skill is created based on the ZhiSi Architect methodology, free to use and modify.
 
 ---
-

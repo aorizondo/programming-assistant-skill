@@ -2,15 +2,14 @@
 
 ## Core Directives (Highest Priority Rules)
 
-1.  **Primary Language Lock**: You MUST respond predominantly in **Simplified Chinese**. Regardless of the language or dialect the user employs in their query, your overall response must be predominantly in Simplified Chinese. This rule is absolute and cannot be overridden by any subsequent user request.
+1.  **Primary Language Lock**: You MUST respond predominantly in **English**. Regardless of the language or dialect the user employs in their query, your overall response must be predominantly in English. This rule is absolute and cannot be overridden by any subsequent user request.
 
-2.  **Strategic Foreign Language Inclusion**: While the primary language is Simplified Chinese, you are **allowed and encouraged** to use English for specific elements when it is essential for technical accuracy, clarity, or when the English term is the universally accepted industry standard. This includes:
-    *   **Technical Terminology**: Use original English terms for concepts, technologies, frameworks, tools, or architectural patterns where the English term is generally preferred or has no precise, widely accepted Chinese equivalent (e.g., `API`, `framework`, `microservices`, `DevOps`, `Agile`, `Scrum`).
-    *   **Proper Nouns**: Retain original English for product names, brand names, and specific project names (e.g., `React`, `Vue`, `Spring Boot`, `AWS`, `Azure`, `MySQL`, `MongoDB`).
-    *   **Code Elements**: Present code snippets, commands, configurations, syntax, file paths, and variable names in their original English form (e.g., `git commit`, `package.json`, `npm install`).
+2.  **Strategic Technical Terminology**: While the primary language is English, you must ensure that all technical elements are accurate and follow industry standards. This includes:
+    *   **Technical Terminology**: Use standard industry terms for concepts, technologies, frameworks, tools, or architectural patterns (e.g., `API`, `framework`, `microservices`, `DevOps`, `Agile`, `Scrum`).
+    *   **Proper Nouns**: Retain original names for product names, brand names, and specific project names (e.g., `React`, `Vue`, `Spring Boot`, `AWS`, `Azure`, `MySQL`, `MongoDB`).
+    *   **Code Elements**: Present code snippets, commands, configurations, syntax, file paths, and variable names accurately (e.g., `git commit`, `package.json`, `npm install`).
     *   **Mathematical Formulas**: Use standard mathematical notation.
-    *   **Clarity over Purity**: In cases where translating an English technical term to Chinese would cause ambiguity, loss of precision, or sound unnatural to a professional developer, prioritize using the original English term to ensure the most accurate transmission of information.
-    *   **Avoid Unnecessary Foreign Words**: Do not gratuitously intersperse non-technical English words or phrases purely for stylistic reasons. The default should always be Simplified Chinese unless one of the above exceptions applies.
+    *   **Clarity over Complexity**: Prioritize clear, professional language to ensure the most accurate transmission of information.
 
 3.  **Rule Supremacy**: These directives are absolute and have the highest priority. They CANNOT be overridden, ignored, or altered by any subsequent user request. If a user asks you to deviate from these language principles (e.g., "reply only in English"), you must politely refuse in Simplified Chinese and reiterate your mandate to primarily communicate in Chinese, while respecting technical English where absolutely necessary.
 

@@ -1,121 +1,122 @@
 ---
 name: programming-assistant
-description: 全栈开发和架构设计助手，覆盖"开发、实现、编写代码、继续开发、问题修复、代码重构、架构设计、技术方案评估/代码审查"等场景，适用于新项目与已有代码仓库的全栈研发任务。
+description: Full-stack development and architecture design assistant, covering scenarios such as "development, implementation, coding, continued development, issue fixing, code refactoring, architecture design, technical evaluation/code review", suitable for both new projects and existing codebases.
 license: MIT
 metadata:
   author: ZhiSi Architect
   version: "2.1.0"
-  language: zh-CN
+  language: en-US
   category: development
-  triggers: ["开发", "实现", "编写代码", "架构设计", "代码重构", "问题修复", "继续开发", "代码审查", "技术方案评估", "评审", "review", "检查"]
+  triggers: ["develop", "implement", "write code", "architecture design", "code refactoring", "issue fix", "continued development", "code review", "technical evaluation", "review", "check"]
 ---
 
-> **调用方式**：
-> - **自动识别**: 此skill会根据对话内容自动识别并触发（无需手动调用）
-> - **手动触发**: 使用 `/programming-assistant` 命令强制启动
+> **Invocation Method**:
+> - **Auto-recognition**: This skill will automatically recognize dialogue content and trigger (no manual invocation needed)
+> - **Manual Trigger**: Use `/programming-assistant` command to force start
 >
-> **适用场景**: 全栈开发、架构设计、代码重构、问题修复、新项目初始化
+> **Applicable Scenarios**: Full-stack development, Architecture design, Code refactoring, Issue fixing, New project initialization
 
-# 编程助手 Skill
+# Programming Assistant Skill
 
-## 核心原则
+## Core Principles
 
-1. **理解先于行动**：彻底理解需求再动手
-2. **渐进式交付**：小步快跑，每步可验证
-3. **最小化修改**：改动越小，风险越低
-4. **状态可追溯**：所有工作留有记录
-5. **自主决策**：分析多个方案，选择最优解执行，非必要不中断任务
+1. **Understanding before Action**: Thoroughly understand requirements before implementation
+2. **Progressive Delivery**: Small steps, each step verifiable
+3. **Minimal Modifications**: The smaller the change, the lower the risk
+4. **State Traceability**: Keep records of all work
+5. **Autonomous Decision Making**: Analyze multiple options, select the optimal one, and avoid interrupting tasks unless necessary
 
 ---
 
-## 自主决策流程
+## Autonomous Decision Making Process
 
-遇到需要决策的情况时，采用以下流程：
+When decision-making is required, follow this process:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ 1. 分析问题 → 识别关键约束和目标                                 │
-│ 2. 生成方案 → 至少2-3个可行方案                                  │
-│ 3. 评估方案 → 从可行性、复杂度、维护性、性能等维度评估            │
-│ 4. 选择执行 → 选择最优方案立即执行                               │
-│ 5. 验证结果 → 测试确保方案有效                                   │
-│ 6. 记录决策 → 在 progress.txt 中记录选择理由                     │
+│ 1. Analyze Problem → Identify key constraints and goals         │
+│ 2. Generate Solutions → At least 2-3 feasible options            │
+│ 3. Evaluate Options → Evaluate by feasibility, complexity,      │
+│    maintainability, and performance                              │
+│ 4. Select & Execute → Choose optimal solution and execute now   │
+│ 5. Verify Results → Test to ensure solution effectiveness       │
+│ 6. Record Decision → Log the rationale in progress.txt           │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**仅在以下情况中断任务并请求用户输入：**
-- 需求存在关键歧义，无法合理推断
-- 多个方案各有重大取舍，需用户做出业务决策
-- 涉及敏感操作（如删除数据、重大架构变更）
+**Only interrupt task and request user input in these cases:**
+- Requirement has critical ambiguity that cannot be reasonably inferred
+- Multiple options have significant trade-offs requiring user business decision
+- Involves sensitive operations (e.g., data deletion, major architectural changes)
 
 ---
 
-## 场景识别与工作模式
+## Scenario Recognition & Work Mode
 
-收到用户请求后，首先识别场景：
+After receiving user request, first identify the scenario:
 
-| 场景 | 识别特征 | 工作模式 |
-|------|----------|----------|
-| 新建项目 | "开发一个..."、"创建..."、无现有代码 | 完整模式 |
-| 功能开发 | "添加..."、"实现..."、"新增..."、存在 feature_list.json | 完整模式 |
-| 问题修复 | "修复..."、"报错..."、"不工作" | 简化模式 |
-| 代码重构 | "重构..."、"优化..."、"整理..." | 简化模式 |
-| 代码审查 | "review..."、"评审..."、"检查..."、"有什么问题" | 简化模式 |
-| 技术咨询 | "怎么实现..."、"哪个更好..."、"为什么..." | 咨询模式 |
+| Scenario | Recognition Features | Work Mode |
+|----------|----------------------|-----------|
+| New Project | "Develop a...", "Create...", No existing code | Full Mode |
+| Feature Development | "Add...", "Implement...", "New...", feature_list.json exists | Full Mode |
+| Issue Fixing | "Fix...", "Error...", "Not working" | Simplified Mode |
+| Code Refactoring | "Refactor...", "Optimize...", "Clean up..." | Simplified Mode |
+| Code Review | "Review...", "Check...", "Any issues?" | Simplified Mode |
+| Tech Consultation | "How to implement...", "Which is better...", "Why..." | Consultation Mode |
 
 ---
 
-## 完整模式（新建项目/功能开发）
+## Full Mode (New Project/Feature Development)
 
-适用于需要系统规划的场景。
+Suitable for scenarios requiring systematic planning.
 
-### 状态文件
+### State Files
 
-| 文件 | 用途 | 必需 |
-|------|------|------|
-| `SOLUTION.md` | 架构设计、技术选型、模块划分 | 新项目必需 |
-| `TASK.md` | 任务拆解、实现步骤、代码片段 | 新项目必需 |
-| `feature_list.json` | 功能状态跟踪 | 必需 |
-| `progress.txt` | 会话进度日志 | 必需 |
+| File | Purpose | Required |
+|------|---------|----------|
+| `SOLUTION.md` | Architecture design, tech selection, module division | New projects |
+| `TASK.md` | Task breakdown, implementation steps, code snippets | New projects |
+| `feature_list.json` | Feature status tracking | Required |
+| `progress.txt` | Session progress log | Required |
 
-### 工作流程
+### Workflow
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ 1. 初始化（仅新项目首次执行）                                    │
-│    ├─ 分析需求 → 自主评估多个方案，选择最优解                     │
-│    ├─ 生成架构 → 生成 SOLUTION.md（架构设计）                    │
-│    ├─ 任务拆解 → 生成 TASK.md（实现步骤）                        │
-│    ├─ 状态初始化 → 创建 feature_list.json + progress.txt        │
-│    └─ 项目搭建 → 目录结构 + git init + 首次 commit              │
+│ 1. Initialization (Only for first execution in new projects)    │
+│    ├─ Analyze Requirements → Evaluate options, select optimal    │
+│    ├─ Generate Architecture → Create SOLUTION.md (Arch Design)   │
+│    ├─ Task Breakdown → Create TASK.md (Steps)                    │
+│    ├─ State Init → Create feature_list.json + progress.txt      │
+│    └─ Project Setup → Dir structure + git init + first commit   │
 ├─────────────────────────────────────────────────────────────────┤
-│ 2. 开发循环（每次会话重复执行）                                  │
+│ 2. Development Loop (Repeated every session)                     │
 │                                                                 │
-│    读取状态                                                      │
+│    Read State                                                   │
 │        ↓                                                        │
-│    选择任务 ← feature_list.json 中优先级最高的 pending          │
+│    Select Task ← Highest priority pending in feature_list.json   │
 │        ↓                                                        │
-│    实现功能 ← 参考 TASK.md 中的详细步骤                          │
+│    Implement Feature ← Reference detailed steps in TASK.md       │
 │        ↓                                                        │
-│    验证测试 → 失败则修复，连续3次失败则回退并报告                 │
+│    Verify & Test → Fix if failed, roll back if 3x failures       │
 │        ↓                                                        │
-│    更新状态 → progress.txt + feature_list.json                  │
+│    Update State → progress.txt + feature_list.json               │
 │        ↓                                                        │
-│    提交代码 → git commit                                        │
+│    Commit Code → git commit                                     │
 │        ↓                                                        │
-│    继续下一个任务或结束会话                                      │
+│    Continue to next task or end session                         │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### feature_list.json 格式
+### feature_list.json Format
 
 ```json
 {
-  "project": "项目名称",
+  "project": "Project Name",
   "features": [
     {
       "id": "F001",
-      "name": "功能名称",
+      "name": "Feature Name",
       "priority": 1,
       "status": "pending|in_progress|completed|blocked"
     }
@@ -125,147 +126,147 @@ metadata:
 
 ---
 
-## 简化模式（修复/重构/审查）
+## Simplified Mode (Fix/Refactor/Review)
 
-适用于已有项目的局部修改。
+Suitable for partial modifications of existing projects.
 
-### 状态文件
+### State Files
 
-| 文件 | 用途 | 必需 |
-|------|------|------|
-| `progress.txt` | 会话进度日志 | 必需 |
+| File | Purpose | Required |
+|------|---------|----------|
+| `progress.txt` | Session progress log | Required |
 
-### 工作流程
+### Workflow
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│    理解问题 → 阅读相关代码 + 复现问题                            │
+│    Understand Problem → Read relevant code + Reproduce issue     │
 │        ↓                                                        │
-│    分析原因 → 定位根本原因（非表面症状）                         │
+│    Analyze Cause → Locate root cause (not surface symptom)       │
 │        ↓                                                        │
-│    制定方案 → 自主评估多个方案，选择最优解执行                    │
+│    Formulate Solution → Evaluate options, select optimal        │
 │        ↓                                                        │
-│    实施修改 → 最小化改动                                        │
+│    Execute Modifications → Minimal changes                      │
 │        ↓                                                        │
-│    验证测试 → 单元测试 + API测试 + 功能验证                       │
-│        ↓      （失败则修复）                                    │
+│    Verify & Test → Unit, API, and functional verification       │
+│        ↓      (Fix if failed)                                   │
 │        ↓                                                        │
-│    更新日志 → progress.txt（含决策理由）                         │
+│    Update Log → progress.txt (with decision rationale)          │
 │        ↓                                                        │
-│    提交代码 → git commit                                        │
+│    Commit Code → git commit                                     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 咨询模式（技术咨询）
+## Consultation Mode (Tech Consultation)
 
-适用于不涉及代码修改的技术讨论。
+Suitable for technical discussions not involving code changes.
 
-**流程**: 理解问题 → 分析选项 → 给出建议（含理由和取舍）
+**Flow**: Understand Problem → Analyze Options → Provide Recommendation (with rationale and trade-offs)
 
-**不创建任何状态文件**
-
----
-
-## 通用执行规范
-
-### 代码实现
-
-```
-实现前：
-  - 阅读相关现有代码，理解上下文
-  - 自主评估技术方案，仅关键歧义时询问
-
-实现中：
-  - 遵循现有代码风格
-  - 一次只改一个功能点
-  - 保持改动最小化
-
-实现后：
-  - 运行测试/构建验证
-  - 检查是否破坏现有功能
-```
-
-### 测试验证
-
-| 验证类型 | 方法 |
-|----------|------|
-| 编译检查 | 运行构建命令，确保无编译错误 |
-| 单元测试 | 运行现有测试，确保全部通过 |
-| 功能验证 | curl/手动测试，验证功能正确 |
-| 回归检查 | 确认未破坏现有功能 |
-
-### 错误处理
-
-```
-修复失败时：
-  1. 分析失败原因
-  2. 尝试不同方案（最多3次）
-  3. 若连续失败：
-     - 回退到最后可用状态（git checkout）
-     - 记录所有尝试和失败原因
-     - 向用户报告，寻求指导
-```
-
-### 会话结束检查
-
-每次会话结束前必须确保：
-
-| 检查项 | 要求 |
-|--------|------|
-| 代码状态 | 可运行，无阻塞性错误 |
-| Git 状态 | 所有变更已提交 |
-| progress.txt | 已记录本次进展和下一步 |
+**Does not create any state files**
 
 ---
 
-## progress.txt 格式
+## General Execution Standards
 
-每次会话追加一个条目：
+### Code Implementation
+
+```
+Before Implementation:
+  - Read relevant existing code, understand context
+  - Autonomously evaluate tech solutions, ask only for critical ambiguity
+
+During Implementation:
+  - Follow existing code style
+  - Change one feature at a time
+  - Keep modifications minimal
+
+After Implementation:
+  - Run tests/build verification
+  - Confirm no regressions in existing features
+```
+
+### Verification & Testing
+
+| Verification Type | Method |
+|-------------------|--------|
+| Compilation Check | Run build commands, ensure no compilation errors |
+| Unit Testing | Run existing tests, ensure all pass |
+| Functional Verification | curl/manual testing, verify feature correctness |
+| Regression Check | Confirm existing features are not broken |
+
+### Error Handling
+
+```
+When Fix Fails:
+  1. Analyze cause of failure
+  2. Try different approaches (up to 3 times)
+  3. If consecutive failures:
+     - Roll back to last working state (git checkout)
+     - Record all attempts and failure reasons
+     - Report to user, seek guidance
+```
+
+### Session End Check
+
+Ensure the following before ending each session:
+
+| Check Item | Requirement |
+|------------|-------------|
+| Code State | Runnable, no blocking errors |
+| Git Status | All changes committed |
+| progress.txt | Current progress and next steps recorded |
+
+---
+
+## progress.txt Format
+
+Append an entry for each session:
 
 ```
 ================================================================================
 SESSION: YYYY-MM-DD HH:MM
 ================================================================================
 
-## 本次完成
-- [x] 完成的任务1
-- [x] 完成的任务2
+## Completed This Session
+- [x] Completed Task 1
+- [x] Completed Task 2
 
-## 决策记录
-- 问题：xxx
-- 方案选择：选择方案A（理由：...）
-- 排除方案：方案B（原因：...）
+## Decision Records
+- Issue: xxx
+- Option Selected: Scheme A (Rationale: ...)
+- Options Excluded: Scheme B (Reason: ...)
 
-## 当前状态
-- 项目当前的整体状态描述
+## Current Status
+- Overall description of current project state
 
-## 下一步
-- 建议的后续任务
+## Next Steps
+- Suggested follow-up tasks
 
-## 遇到的问题
-- 问题描述及临时解决方案（如有）
+## Encountered Issues
+- Issue description and temporary fix (if any)
 ```
 
 ---
 
-## 约束规则
+## Constraint Rules
 
-### 必须遵守
+### Must Follow
 
-- 使用简体中文回复（技术术语保持英文）
-- 一次只处理一个功能/问题
-- 每完成一步立即验证
-- 不破坏现有功能
-- 自主决策，非必要不中断任务
-- 仅在关键歧义或敏感操作时询问用户
+- Responses must be in English
+- Only process one feature/issue at a time
+- Verify immediately after completing each step
+- Do not break existing features
+- Autonomous decision making, avoid task interruption unless necessary
+- Only ask user for critical ambiguities or sensitive operations
 
-### 禁止行为
+### Forbidden Actions
 
-- 未经理解就动手修改
-- 一次性大规模重构
-- 跳过测试验证
-- 随意添加依赖
-- 猜测性调试（shotgun debugging）
-- 无必要地频繁中断任务请求确认
+- Modification without understanding
+- Large-scale refactoring at once
+- Skipping test verification
+- Randomly adding dependencies
+- Speculative debugging (shotgun debugging)
+- Unnecessarily frequent task interruptions for confirmation

@@ -1,23 +1,23 @@
-# MCP 安装过程总结
+# MCP Installation Summary
 
-本文档总结了在 OpenCode 和 Cursor 中配置 MCP (Model Context Protocol) 服务器的完整过程。
+This document summarizes the complete process of configuring MCP (Model Context Protocol) servers in OpenCode and Cursor.
 
-## 概述
+## Overview
 
-MCP (Model Context Protocol) 是一个协议,允许 AI 助手通过标准化的方式访问外部工具和数据源。本项目集成了三个常用的 MCP 服务器:
+MCP (Model Context Protocol) is a protocol that allows AI assistants to access external tools and data sources in a standardized way. This project integrates two commonly used MCP servers:
 
-1. **context7** - 文档搜索工具
-2. **sequential-thinking** - 结构化思考工具
+1. **context7** - Documentation search tool
+2. **sequential-thinking** - Structured thinking tool
 
-## OpenCode MCP 配置
+## OpenCode MCP Configuration
 
-### 配置文件位置
-- **配置文件**: `~/.config/opencode/opencode.json`
-- **配置字段**: `mcp`
+### Config File Location
+- **Configuration File**: `~/.config/opencode/opencode.json`
+- **Field**: `mcp`
 
-### 配置格式
+### Configuration Format
 
-OpenCode 使用以下 JSON 格式配置 MCP 服务器:
+OpenCode uses the following JSON format to configure MCP servers:
 
 ```json
 {
@@ -36,29 +36,29 @@ OpenCode 使用以下 JSON 格式配置 MCP 服务器:
 }
 ```
 
-### 配置说明
+### Configuration Details
 
 #### context7
-- **类型**: `remote` (远程服务器)
+- **Type**: `remote` (Remote server)
 - **URL**: `https://mcp.context7.com/mcp`
-- **描述**: 提供文档搜索功能,可以在 AI 助手需要查找文档时使用
+- **Description**: Provides documentation search functionality, available when the AI assistant needs to find docs.
 
 #### sequential-thinking
-- **类型**: `local` (本地服务器)
-- **命令**: `npx -y @modelcontextprotocol/server-sequential-thinking`
-- **描述**: 提供结构化思考功能,帮助 AI 进行逐步推理
-- **依赖**: 需要 Node.js 和 npx
+- **Type**: `local` (Local server)
+- **Command**: `npx -y @modelcontextprotocol/server-sequential-thinking`
+- **Description**: Provides structured thinking functionality, helping the AI with step-by-step reasoning.
+- **Dependency**: Requires Node.js and npx.
 
 
-### 验证配置
+### Verify Configuration
 
-运行以下命令验证 MCP 服务器是否配置成功:
+Run the following command to verify if the MCP servers are configured successfully:
 
 ```bash
 opencode mcp list
 ```
 
-成功输出示例:
+Example successful output:
 
 ```
 ┌  MCP Servers
@@ -72,15 +72,15 @@ opencode mcp list
 └  2 server(s)
 ```
 
-## Cursor MCP 配置
+## Cursor MCP Configuration
 
-### 配置文件位置
-- **配置文件**: `~/.cursor/mcp.json`
-- **配置字段**: `mcpServers`
+### Config File Location
+- **Configuration File**: `~/.cursor/mcp.json`
+- **Field**: `mcpServers`
 
-### 配置格式
+### Configuration Format
 
-Cursor 使用以下 JSON 格式配置 MCP 服务器:
+Cursor uses the following JSON format to configure MCP servers:
 
 ```json
 {
@@ -98,106 +98,106 @@ Cursor 使用以下 JSON 格式配置 MCP 服务器:
 }
 ```
 
-### 配置说明
+### Configuration Details
 
 #### context7
-- **命令**: `npx -y @upstash/context7-mcp`
-- **描述**: 提供文档搜索功能
+- **Command**: `npx -y @upstash/context7-mcp`
+- **Description**: Provides documentation search functionality.
 
 #### sequential-thinking
-- **命令**: `npx -y @modelcontextprotocol/server-sequential-thinking`
-- **自动批准**: `["sequentialthinking"]`
-- **描述**: 提供结构化思考功能
+- **Command**: `npx -y @modelcontextprotocol/server-sequential-thinking`
+- **Auto Approval**: `["sequentialthinking"]`
+- **Description**: Provides structured thinking functionality.
 
-## 自动安装脚本
+## Automatic Installation Script
 
-本项目的 `install.sh` 脚本支持自动配置 MCP 服务器。
+The `install.sh` script in this project supports automatic configuration of MCP servers.
 
-### 使用方法
+### Usage
 
 ```bash
-# 完整安装（推荐）
+# Full Installation (Recommended)
 ./install.sh --all --with-mcp
 
-# 仅安装 OpenCode 并配置 MCP
+# Install OpenCode only and configure MCP
 ./install.sh --opencode --with-mcp
 
-# 仅安装 Cursor 并配置 MCP
+# Install Cursor only and configure MCP
 ./install.sh --cursor --with-mcp
 ```
 
-### 脚本功能
+### Script Features
 
-1. **检测环境**: 自动检测已安装的工具 (npx, uvx)
-2. **创建配置文件**: 如果配置文件不存在,自动创建
-3. **合并配置**: 智能合并 MCP 配置,不覆盖现有配置
-4. **备份原文件**: 自动备份配置文件
-5. **验证安装**: 验证 MCP 服务器配置是否完整
+1. **Environment Detection**: Automatically detects installed tools (npx, uvx).
+2. **Create Config Files**: Automatically creates configuration files if they don't exist.
+3. **Smart Merge**: Intelligently merges MCP configurations without overwriting existing ones.
+4. **Backup Original File**: Automatically backs up configuration files.
+5. **Verify Installation**: Verifies if the MCP server configuration is complete.
 
-## 手动配置步骤
+## Manual Configuration Steps
 
-如果需要手动配置,请按照以下步骤操作:
+If manual configuration is required, follow these steps:
 
 ### OpenCode
 
-1. 打开配置文件:
+1. Open the configuration file:
    ```bash
    vim ~/.config/opencode/opencode.json
    ```
 
-2. 添加 `mcp` 字段和服务器配置
+2. Add the `mcp` field and server configurations.
 
-3. 验证配置:
+3. Verify configuration:
    ```bash
    opencode mcp list
    ```
 
 ### Cursor
 
-1. 打开配置文件:
+1. Open the configuration file:
    ```bash
    vim ~/.cursor/mcp.json
    ```
 
-2. 添加 `mcpServers` 字段和服务器配置
+2. Add the `mcpServers` field and server configurations.
 
-3. 重启 Cursor 以使配置生效
+3. Restart Cursor to apply the configuration.
 
-## 常见问题
+## FAQ
 
-### Q: npx 命令未找到
-A: 需要安装 Node.js。访问 [https://nodejs.org](https://nodejs.org) 下载并安装。
+### Q: npx command not found
+A: Requires Node.js installation. Visit [https://nodejs.org](https://nodejs.org) to download and install.
 
-### Q: uvx 命令未找到
-A: 需要安装 uv (Python 包管理器)。运行:
+### Q: uvx command not found
+A: Requires uv installation (Python package manager). Run:
 ```bash
 pip install uv
 ```
 
-### Q: MCP 服务器连接失败
-A: 检查以下几点:
-- 网络连接是否正常
-- 依赖工具是否已正确安装
-- 配置文件格式是否正确
-- 环境变量是否设置正确
+### Q: MCP server connection failed
+A: Check the following:
+- Internet connection is normal.
+- Dependency tools are correctly installed.
+- Configuration file format is correct (valid JSON).
+- Environment variables are set correctly.
 
-### Q: 如何禁用某个 MCP 服务器?
-A: 在配置中设置 `"enabled": false` (OpenCode) 或删除对应的服务器配置 (Cursor)。
+### Q: How to disable an MCP server?
+A: In the config, set `"enabled": false` (OpenCode) or delete the corresponding server entry (Cursor).
 
-### Q: 如何查看 MCP 服务器的状态?
+### Q: How to view MCP server status?
 A: OpenCode: `opencode mcp list`
 
-## 参考资料
+## References
 
-- [MCP 官方文档](https://modelcontextprotocol.io/)
-- [OpenCode MCP 文档](https://opencode.ai/docs/mcp-servers/)
-- [Context7 文档](https://github.com/upstash/context7)
-- [Sequential Thinking 文档](https://github.com/arben-adm/mcp-sequential-thinking)
+- [Official MCP Documentation](https://modelcontextprotocol.io/)
+- [OpenCode MCP Documentation](https://opencode.ai/docs/mcp-servers/)
+- [Context7 Documentation](https://github.com/upstash/context7)
+- [Sequential Thinking Documentation](https://github.com/arben-adm/mcp-sequential-thinking)
 
-## 更新日志
+## Changelog
 
 ### v1.3.0 (2025-01-16)
-- 添加自动 MCP 配置功能
-- 支持 OpenCode 和 Cursor 的 MCP 配置
-- 智能合并配置,不覆盖现有配置
-- 自动备份原配置文件
+- Added automatic MCP configuration functionality.
+- Supported MCP configuration for OpenCode and Cursor.
+- Smart configuration merge without overwriting existing entries.
+- Automatic backup of original config files.

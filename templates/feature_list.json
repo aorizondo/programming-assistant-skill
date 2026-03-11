@@ -1,13 +1,13 @@
 {
-  "project": "[项目名称]",
-  "description": "[项目描述]",
-  "created": "[创建日期]",
-  "updated": "[最后更新日期]",
+  "project": "[Project Name]",
+  "description": "[Project Description]",
+  "created": "[Creation Date]",
+  "updated": "[Last Updated Date]",
   "features": [
     {
       "id": "F001",
-      "name": "[功能名称]",
-      "description": "[功能详细描述]",
+      "name": "[Feature Name]",
+      "description": "[Detailed Feature Description]",
       "priority": 1,
       "status": "pending",
       "dependencies": [],
@@ -16,8 +16,8 @@
     },
     {
       "id": "F002",
-      "name": "[功能名称]",
-      "description": "[功能详细描述]",
+      "name": "[Feature Name]",
+      "description": "[Detailed Feature Description]",
       "priority": 2,
       "status": "pending",
       "dependencies": ["F001"],
@@ -26,9 +26,9 @@
     }
   ],
   "status_definitions": {
-    "pending": "未开始",
-    "in_progress": "进行中",
-    "completed": "已完成",
-    "blocked": "被阻塞"
+    "pending": "Pending",
+    "in_progress": "In Progress",
+    "completed": "Completed",
+    "blocked": "Blocked"
   }
 }

@@ -1,67 +1,67 @@
-# 编程助手 - 快速开始指南
+# Programming Assistant - Quick Start Guide
 
-## 5分钟快速上手
+## 5-Minute Quick Start
 
-### 推荐方式：一键安装（1分钟）
+### Recommended Method: One-Click Installation (1 Minute)
 
-使用提供的安装脚本，自动完成所有配置：
+Use the provided installation script to automatically complete all configurations:
 
 ```bash
-# 完整安装（OpenCode + Cursor + MCP）
+# Full Installation (OpenCode + Cursor + MCP)
 ./install.sh --all --with-mcp
 ```
 
-这个命令会：
-1. ✅ 安装到 OpenCode（全局）
-2. ✅ 安装到 Cursor（全局规则）
-3. ✅ 配置 MCP 服务器（context7, sequential-thinking）
-4. ✅ 验证安装结果
+This command will:
+1. ✅ Install to OpenCode (Global)
+2. ✅ Install to Cursor (Global Rules)
+3. ✅ Configure MCP Servers (context7, sequential-thinking)
+4. ✅ Verify installation results
 
-**安装完成后，重启 OpenCode 和 Cursor 即可使用！**
+**After installation, restart OpenCode and Cursor to use!**
 
-其他选项：
+Other options:
 ```bash
-./install.sh                    # 交互式安装
-./install.sh --opencode         # 仅安装到 OpenCode
-./install.sh --cursor           # 仅安装到 Cursor
-./install.sh --dry-run          # 预览安装，不实际执行
-./install.sh --help             # 显示帮助信息
+./install.sh                    # Interactive Installation
+./install.sh --opencode         # Install to OpenCode only
+./install.sh --cursor           # Install to Cursor only
+./install.sh --dry-run          # Preview installation without execution
+./install.sh --help             # Show help information
 ```
 
-卸载：
+Uninstallation:
 ```bash
 ./uninstall.sh --all --with-mcp
 ```
 
 ---
 
-### 传统方式：手动安装（5分钟）
+### Traditional Method: Manual Installation (5 Minutes)
 
-#### 第1步：准备文件（1分钟）
+#### Step 1: Prepare Files (1 Minute)
 
-#### 如果你使用OpenCode
+#### If you use OpenCode
 
-> 📚 参考: [OpenCode Skills 官方文档](https://opencode.ai/docs/skills/)
+> 📚 Reference: [OpenCode Skills Official Documentation](https://opencode.ai/docs/skills/)
 
-**一键安装（推荐）**：
+**One-Click Install (Recommended)**:
 ```bash
 ./install.sh --opencode --with-mcp
 ```
 
-这将自动：
-1. ✅ 安装 skill 到 `~/.config/opencode/skill/programming-assistant/`
-2. ✅ 配置 MCP 服务器
-3. ✅ 验证安装结果
+This will automatically:
+1. ✅ Install skill to `~/.config/opencode/skill/programming-assistant/`
+2. ✅ Configure MCP servers
+3. ✅ Verify installation results
 
-**手动安装**：
+**Manual Installation**:
 ```bash
-# 创建全局 skill 目录（注意路径）
+# Create global skill directory (Note the path)
 mkdir -p ~/.config/opencode/skill/programming-assistant
 
-# 复制 SKILL.md
+# Copy SKILL.md
 cp SKILL.md ~/.config/opencode/skill/programming-assistant/
 
-# 配置 MCP 服务器（可选）
+# Configure MCP servers (Optional)
 mkdir -p ~/.config/opencode
 cat > ~/.config/opencode/opencode.json << 'EOF'
 {
@@ -78,162 +78,162 @@ cat > ~/.config/opencode/opencode.json << 'EOF'
 }
 EOF
 
-# 重启 OpenCode
+# Restart OpenCode
 ```
 
-**项目级安装**（如果需要项目特定配置）：
+**Project-Level Installation** (If project-specific config is needed):
 ```bash
-# 在项目根目录
+# In project root
 cd /your/project
 
-# 创建项目 skill 目录
+# Create project skill directory
 mkdir -p .opencode/skill/programming-assistant
 
-# 复制 SKILL.md
+# Copy SKILL.md
 cp /path/to/SKILL.md .opencode/skill/programming-assistant/
 ```
 
-**重要提示**:
-- ✅ 全局路径: `~/.config/opencode/skill/<name>/SKILL.md`
-- ✅ 项目路径: `.opencode/skill/<name>/SKILL.md`
-- ❌ 错误路径: `~/.opencode/skills/`（注意不是这个！）
+**Important Notes**:
+- ✅ Global path: `~/.config/opencode/skill/<name>/SKILL.md`
+- ✅ Project path: `.opencode/skill/<name>/SKILL.md`
+- ❌ Incorrect path: `~/.opencode/skills/` (Note: not this one!)
 
-#### 如果你使用Cursor
+#### If you use Cursor
 
-**一键安装（推荐）**：
+**One-Click Install (Recommended)**:
 ```bash
 ./install.sh --cursor --with-mcp
 ```
 
-**手动安装（全局 skills）**：
+**Manual Installation (Global Skills)**:
 ```bash
-# 创建 Claude skills 目录（OpenCode 和 Cursor 兼容）
+# Create Claude skills directory (OpenCode and Cursor compatible)
 mkdir -p ~/.claude/skills/programming-assistant
 
-# 复制 SKILL.md
+# Copy SKILL.md
 cp SKILL.md ~/.claude/skills/programming-assistant/
 
-# 配置 MCP 服务器（编辑 ~/.cursor/mcp.json）
-# 参考 3.MCP.txt 文件
+# Configure MCP servers (Edit ~/.cursor/mcp.json)
+# Refer to 3.MCP.txt file
 
-# 重启 Cursor 以使更改生效
+# Restart Cursor to apply changes
 ```
 
-**手动安装（项目级）**：
-在项目根目录创建 `.cursorrules` 文件，添加：
+**Manual Installation (Project-Level)**:
+Create a `.cursorrules` file in project root and add:
 ```markdown
-# 引用编程助手skill
+# Reference Programming Assistant Skill
 
-你是一名资深的软件工程师和架构师"ZhiSi Architect"，拥有超过10年的全栈开发经验。
+You are a senior software engineer and architect "ZhiSi Architect" with over 10 years of full-stack development experience.
 
-完整指令请参考: programming-assistant.skill.md
+For complete instructions, refer to: programming-assistant.skill.md
 ```
 
-### 第3步：开始使用（2分钟）
+### Step 3: Start Using (2 Minutes)
 
-#### 场景1：创建新项目
+#### Scenario 1: Create New Project
 ```
-帮我开发一个简单的博客系统：
-- 文章列表和详情页
-- 评论功能
-- 用户注册和登录
+Help me develop a simple blog system:
+- Post list and detail page
+- Comments feature
+- User registration and login
 
-前端用Vue 3，后端用Go，数据库用PostgreSQL。
-```
-
-助手会自动：
-1. 与你确认需求
-2. 生成 SOLUTION.md 和 TASK.md
-3. 创建项目结构
-4. 准备开始开发
-
-#### 场景2：实现功能
-```
-实现用户注册功能
+Frontend with Vue 3, backend with Go, database with PostgreSQL.
 ```
 
-助手会自动：
-1. 查阅相关文档（通过Context7）
-2. 设计API接口
-3. 实现前后端代码
-4. 编写测试
-5. 验证功能
+Assistant will automatically:
+1. Confirm requirements with you
+2. Generate SOLUTION.md and TASK.md
+3. Create project structure
+4. Prepare to start development
 
-#### 场景3：修复问题
+#### Scenario 2: Implement Feature
 ```
-用户登录后token过期时间太短，如何延长？
+Implement user registration feature
 ```
 
-助手会自动：
-1. 分析问题原因
-2. 查找最佳实践
-3. 提供解决方案
-4. 实施修改
-5. 测试验证
+Assistant will automatically:
+1. Consult relevant docs (via Context7)
+2. Design API interface
+3. Implement frontend and backend code
+4. Write tests
+5. Verify feature
 
-## 在OpenCode中使用
+#### Scenario 3: Fix Issue
+```
+User login token expiration is too short, how to extend?
+```
 
-> 📚 官方文档: https://opencode.ai/docs/skills/
+Assistant will automatically:
+1. Analyze cause
+2. Research best practices
+3. Provide solution
+4. Implement modifications
+5. Test and verify
 
-### 使用方法
+## Using in OpenCode
 
-安装完成后，**重启 OpenCode**，skill 会自动加载：
+> 📚 Official Docs: https://opencode.ai/docs/skills/
+
+### Usage Method
+
+After installation, **restart OpenCode**, and the skill will load automatically:
 
 ```bash
 opencode
 ```
 
-OpenCode 会自动发现可用的 skills，Agent 会在需要时调用：
+OpenCode automatically discovers available skills, and the Agent will call them when needed:
 ```javascript
 skill({ name: "programming-assistant" })
 ```
 
-您也可以在对话中明确提示：
+You can also explicitly prompt in conversation:
 ```
-使用 programming-assistant skill 帮我开发一个 API 服务
+Use programming-assistant skill to help me develop an API service
 ```
 
-### 验证安装
+### Verification
 
-**方法 1: 检查文件**
+**Method 1: Check Files**
 ```bash
-# 检查全局 skill
+# Check global skill
 ls -la ~/.config/opencode/skill/programming-assistant/SKILL.md
 
-# 检查 frontmatter
+# Check frontmatter
 head -15 ~/.config/opencode/skill/programming-assistant/SKILL.md
 ```
 
-**方法 2: 启动 OpenCode**
+**Method 2: Start OpenCode**
 
-启动后，Agent 应该能看到 `programming-assistant` 在可用 skills 列表中。
+Upon startup, the Agent should see `programming-assistant` in the available skills list.
 
-### 故障排查
+### Troubleshooting
 
-**问题1: Skill 没有出现**
+**Issue 1: Skill does not appear**
 
-检查清单：
-1. ✅ 文件名是 `SKILL.md`（全大写）
-2. ✅ 路径正确: `~/.config/opencode/skill/programming-assistant/SKILL.md`
-3. ✅ frontmatter 包含 `name` 和 `description`
-4. ✅ `name` 值为 `programming-assistant`（匹配目录名）
-5. ✅ 已重启 OpenCode
+Checklist:
+1. ✅ Filename is `SKILL.md` (All caps)
+2. ✅ Path is correct: `~/.config/opencode/skill/programming-assistant/SKILL.md`
+3. ✅ frontmatter contains `name` and `description`
+4. ✅ `name` value is `programming-assistant` (Matches directory name)
+5. ✅ OpenCode has been restarted
 
-**问题2: 路径错误**
+**Issue 2: Incorrect Path**
 
-❌ 错误路径:
-- `~/.opencode/skills/` (缺少 `config`，且 `skills` 是复数)
-- `~/.opencode/skill/`  (缺少 `config`)
+❌ Incorrect paths:
+- `~/.opencode/skills/` (Missing `config`, and `skills` is plural)
+- `~/.opencode/skill/`  (Missing `config`)
 
-✅ 正确路径:
+✅ Correct path:
 - `~/.config/opencode/skill/programming-assistant/SKILL.md`
 
-**问题3: MCP 工具无法使用**
+**Issue 3: MCP tools unavailable**
 
-MCP 服务器需要单独配置（不包含在 skill 中）：
+MCP servers need individual configuration (not included in the skill):
 
 ```bash
-# 创建全局 MCP 配置
+# Create global MCP configuration
 mkdir -p ~/.config/opencode
 cat > ~/.config/opencode/opencode.json << 'EOF'
 {
@@ -251,210 +251,210 @@ cat > ~/.config/opencode/opencode.json << 'EOF'
 EOF
 ```
 
-或使用安装脚本：
+Or use the installation script:
 ```bash
 ./install.sh --opencode --mcp-auto
 ```
 
 
-## 在Cursor中使用
+## Using in Cursor
 
-### 配置方法
+### Configuration
 
-**方法1: .cursorrules文件**
-在项目根目录创建或编辑 `.cursorrules` 文件，添加：
+**Method 1: .cursorrules file**
+Create or edit `.cursorrules` in project root and add:
 ```markdown
-# 引用编程助手skill
+# Reference Programming Assistant Skill
 
-你是一名资深的软件工程师和架构师"ZhiSi Architect"，拥有超过10年的全栈开发经验。
+You are a senior software engineer and architect "ZhiSi Architect" with over 10 years of full-stack experience.
 
-完整指令请参考: programming-assistant.skill.md
+For complete instructions, refer to: programming-assistant.skill.md
 ```
 
-**方法2: .cursorrules.md文件**
-在项目根目录创建 `.cursorrules.md` 文件，包含完整skill内容：
+**Method 2: .cursorrules.md file**
+Create `.cursorrules.md` in project root containing the full skill content:
 ```markdown
-<!-- 复制 programming-assistant.skill.md 的全部内容到这里 -->
+<!-- Copy full content of programming-assistant.skill.md here -->
 ```
 
-### 使用方法
+### Usage
 
-在Cursor Chat中直接使用，无需额外命令：
+Use directly in Cursor Chat without extra commands:
 ```
-帮我开发一个电商系统，前端用Vue，后端用Go
+Help me develop an e-commerce system: Vue frontend, Go backend
 ```
 
-## 项目结构要求
+## Project Structure Requirements
 
-### 必需文件
+### Required Files
 ```
 your-project/
-├── README.md           # 项目说明
-├── SOLUTION.md         # 架构设计文档
-└── TASK.md            # 构建任务列表
+├── README.md           # Project description
+├── SOLUTION.md         # Architecture design doc
+└── TASK.md            # Build task list
 ```
 
-### 可选文件
+### Optional Files
 ```
 your-project/
-├── DEPLOYMENT.md      # 部署文档
-├── package.json       # Node.js项目
-├── go.mod             # Go项目
-└── requirements.txt   # Python项目
+├── DEPLOYMENT.md      # Deployment documentation
+├── package.json       # Node.js project
+├── go.mod             # Go project
+└── requirements.txt   # Python project
 ```
 
-## 模板文件
+## Templates
 
-### SOLUTION.md 模板
+### SOLUTION.md Template
 ```markdown
-# 项目架构设计
+# Project Architecture Design
 
-## 项目概述
-[描述项目目标和核心功能]
+## Project Overview
+[Describe goals and core features]
 
-## 技术栈
-- 前端: [框架和版本]
-- 后端: [框架和版本]
-- 数据库: [数据库类型和版本]
-- 云服务:
-  - 私有云: Docker, Docker Compose, Kubernetes
-  - 公有云/混合云: 腾讯云、阿里云、华为云为主，AWS/Azure/Google Cloud为补充
+## Tech Stack
+- Frontend: [Framework and version]
+- Backend: [Framework and version]
+- Database: [Type and version]
+- Cloud Services:
+  - Private Cloud: Docker, Docker Compose, Kubernetes
+  - Public/Hybrid Cloud: Primarily Tencent/Alibaba/Huawei, supplements AWS/Azure/GCP
 - DevOps:
-  - CI/CD: 适配私有云和公有云/混合云两类场景
-- 其他: [其他工具等]
+  - CI/CD: Adapted for both private and public/hybrid cloud
+- Other: [Other tools etc.]
 
-## 文件结构
+## File Structure
 ```
 project/
-├── frontend/          # 前端代码
-├── backend/           # 后端代码
-├── database/          # 数据库脚本
-└── docs/              # 文档
+├── frontend/          # Frontend code
+├── backend/           # Backend code
+├── database/          # Database scripts
+└── docs/              # Documentation
 ```
 
-## 架构说明
-[描述各部分的作用和连接方式]
+## Architecture Description
+[Describe role and connection of each part]
 
-## 数据模型
-[描述核心数据表和关系]
+## Data Model
+[Describe core tables and relations]
 
-## API设计
-[列出主要的API端点]
+## API Design
+[List main API endpoints]
 
-## 状态管理
-[描述状态存储位置和管理方式]
+## State Management
+[Describe storage location and management]
 ```
 
-### TASK.md 模板
+### TASK.md Template
 ```markdown
-# 构建任务列表
+# Build Task List
 
-## 阶段1：项目初始化
-- [ ] 创建项目目录结构
-- [ ] 初始化前端项目
-- [ ] 初始化后端项目
-- [ ] 配置数据库连接
+## Phase 1: Project Initialization
+- [ ] Create project directory structure
+- [ ] Initialize frontend project
+- [ ] Initialize backend project
+- [ ] Configure database connection
 
-## 阶段2：核心功能
-- [ ] 实现用户认证模块
-- [ ] 实现数据模型
-- [ ] 实现API接口
-- [ ] 实现前端页面
+## Phase 2: Core Functionality
+- [ ] Implement user authentication module
+- [ ] Implement data models
+- [ ] Implement API interfaces
+- [ ] Implement frontend pages
 
-## 阶段3：测试和优化
-- [ ] 编写单元测试
-- [ ] 编写集成测试
-- [ ] 性能优化
-- [ ] 部署准备
+## Phase 3: Testing & Optimization
+- [ ] Write unit tests
+- [ ] Write integration tests
+- [ ] Performance optimization
+- [ ] Deployment preparation
 ```
 
-## 核心原则（牢记）
+## Core Principles (Keep In Mind)
 
-### 必须遵守
-1. 每次只完成一个任务
-2. 完成后立即测试
-3. 用最少代码完成任务
-4. 不破坏现有功能
+### Must Follow
+1. Complete only one task at a time
+2. Test immediately after completion
+3. Minimal code for tasks
+4. Do not break existing features
 
-### 严禁事项
-1. 不要使用emoji
-2. 不要过度设计
-3. 不要做无关修改
-4. 不要跳过测试
+### Forbidden
+1. Do not use emojis
+2. Do not over-engineer
+3. No irrelevant modifications
+4. Do not skip tests
 
-## MCP工具说明
+## MCP Tools Description
 
 ### Context7
-- **用途**: 获取最新文档和代码示例
-- **何时使用**: 不熟悉某个库或框架的用法时
-- **示例**: "使用Context7查询Vue 3的Composition API最佳实践"
+- **Purpose**: Get latest docs and code examples
+- **When to use**: When unfamiliar with a library or framework usage
+- **Example**: "Use Context7 to search for Vue 3 Composition API best practices"
 
 ### sequential-thinking
-- **用途**: 深度分析复杂问题
-- **何时使用**: 需要深入思考或拆解复杂任务时
-- **示例**: "使用sequential-thinking分析如何设计高并发的订单系统"
+- **Purpose**: Deep analysis of complex problems
+- **When to use**: When deep thinking or breaking down complex tasks is needed
+- **Example**: "Use sequential-thinking to analyze how to design a high-concurrency order system"
 
-## 常见问题
+## FAQ
 
-### Q: 如何更新skill？
-A: 替换对应的skill文件后，需要**重启OpenCode**才能使更改生效。
+### Q: How to update the skill?
+A: Replace the corresponding skill file and **restart OpenCode** to apply changes.
 
-### Q: MCP工具不工作怎么办？
-A: 检查以下内容：
-1. 确认已安装 `npx` 和 `uvx` 运行时
-2. 参考 `mcp-config.json` 中的配置示例
-3. 尝试手动注册 MCP 服务器（见上方"故障排查"）
-4. 确认 `programming-assistant.skill.json` 文件正确加载
+### Q: MCP tools not working?
+A: Check the following:
+1. Confirm `npx` and `uvx` runtimes are installed
+2. Refer to config examples in `mcp-config.json`
+3. Try manual registration of MCP servers (see Troubleshooting above)
+4. Confirm `programming-assistant.skill.json` is loaded correctly
 
-### Q: 为什么推荐全局安装而不是项目级安装？
-A: 全局安装更加稳定，OpenCode 会优先加载全局 skills，避免项目级加载的不确定性和潜在冲突。
+### Q: Why recommendation for global install over project-level?
+A: Global install is more stable; OpenCode prioritizes global skills, avoiding uncertainty and potential conflicts from project-level loading.
 
-### Q: 可以自定义skill吗？
-A: 可以，基于现有的skill文件进行修改，添加你自己的规则和工作流程。
+### Q: Can I customize the skill?
+A: Yes, modify existing skill files to add your own rules and workflows.
 
-### Q: 支持其他编程语言吗？
-A: 是的，skill是语言无关的，可以支持任何编程语言和框架。
+### Q: Supports other programming languages?
+A: Yes, the skill is language-agnostic and supports any programming language or framework.
 
-### Q: 如何禁用某个MCP工具？
-A: 编辑 `programming-assistant.skill.json`，将对应工具的 `enabled` 设置为 `false`。
+### Q: How to disable an MCP tool?
+A: Edit `programming-assistant.skill.json` and set `enabled` to `false` for that tool.
 
-## 文件说明
+## File Descriptions
 
 ```
-SKILL.md                          # OpenCode/Cursor 规范格式的 skill 文件
-VERSION                           # 版本号（单一版本源）
-mcp-config.json                    # MCP 服务器配置模板
-install.sh                        # 一键安装脚本
-uninstall.sh                      # 卸载脚本
-programming-assistant.skill.json    # skill 配置文件
-README.md                         # 项目说明文档
-QUICK-START.md                   # 快速开始指南（本文件）
-templates/                        # 模板文件目录
-  ├── progress.txt                # 进度日志模板
-  └── feature_list.json          # 功能清单模板
+SKILL.md                          # OpenCode/Cursor spec format skill file
+VERSION                           # Version number (single source of truth)
+mcp-config.json                    # MCP server configuration template
+install.sh                        # One-click install script
+uninstall.sh                      # Uninstall script
+programming-assistant.skill.json    # skill configuration file
+README.md                         # Project description doc
+QUICK-START.md                   # Quick Start Guide (This file)
+templates/                        # Templates directory
+  ├── progress.txt                # Progress log template
+  └── feature_list.json          # Feature list template
 ```
 
-## 获取帮助
+## Getting Help
 
-### 遇到问题？
-1. 查看 `README.md` 了解完整文档
-2. 检查 `programming-assistant.skill.json` 中的配置
-3. 确认MCP服务器是否正常运行
-4. 尝试手动注册 MCP 服务器：
+### Encountered Issues?
+1. Check `README.md` for full documentation
+2. Inspect config in `programming-assistant.skill.json`
+3. Confirm MCP servers are running
+4. Try manual registration:
    ```bash
    opencode mcp add context7 npx -y @upstash/context7-mcp
    opencode mcp add sequential-thinking npx -y @modelcontextprotocol/server-sequential-thinking
    ```
 
-### 技能提升
-- 阅读 `programming-assistant.skill.md` 了解完整工作流程
-- 尝试不同的项目类型练习
-- 根据实际需求自定义skill规则
+### Skill Up
+- Read `programming-assistant.skill.md` for full workflow
+- Practice with different project types
+- Customize skill rules based on actual needs
 
-## 下一步
+## Next Steps
 
-1. 阅读完整的 `README.md` 了解详细文档
-2. 开始你的第一个项目
-3. 记录使用经验和改进建议
+1. Read the full `README.md` for detailed documentation
+2. Start your first project
+3. Record usage experience and improvement suggestions
 
-祝你编程愉快！
+Happy Coding!
